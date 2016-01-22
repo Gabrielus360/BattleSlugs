@@ -1,6 +1,5 @@
 package Controller;
 
-import Model.Slug;
 import Model.Square;
 
 public class BoardControl 
@@ -12,11 +11,11 @@ public class BoardControl
 
 	public boolean isEmpty(int x, int y,Square[][] board)
 	{
-		if(board[x][y].getSlug() == null)
+		if(board[x][y].hasSlug())
 		{
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public boolean isValid(int x, int y,int xMax,int yMax)

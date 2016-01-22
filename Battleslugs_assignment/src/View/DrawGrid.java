@@ -10,48 +10,29 @@ import Model.*;
 
 public class DrawGrid extends JPanel implements MouseListener
 {
-	private UIProperties prop;
+	private UIProperties prop = new UIProperties();
 	private Square[][] board;
-	private int[][] hits;
 	private boolean showAllSquares;
-
-	int squareLength = 0;
+	
 
 	/*
 	 * To be used when drawing main board
 	 */
-	public DrawGrid(Square[][] board, int[][] hits, boolean showAllSquares)
+	public DrawGrid(Square[][] board, boolean showAllSquares)
 	{
 		this.board = board;
-		this.hits = hits;
 		this.showAllSquares = showAllSquares;
 		addMouseListener(this);
 	}
-	
-	/*
-	 * Draws slug preview
-	 * Here there are no hits and the player needs to be shown all squares
-	 * To utalise the same code, I needed to create an empty hits[][] variable
-	 */
-	public DrawGrid(Square[][] board)
-	{
-		this.board = board;
-		this.hits = new int[board.length][board[1].length];
-		this.showAllSquares = true;
-	}
-
 
 
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-
-		//System.out.println((int)this.getSize().getWidth());
-		//System.out.println((int)this.getSize().getHeight());
-
+		int length = 0;
+		
 		calculateSquareLength();
-
-		int length = getSquareLength();
+		length = prop.getSquareLength();
 
 		for (int i = board.length-1; i >= 0; i--) 
 		{
@@ -60,12 +41,12 @@ public class DrawGrid extends JPanel implements MouseListener
 				//create large black square every time
 				g.setColor(Color.black);
 
-				g.fillRect((i*length), (j*length), squareLength, squareLength);
+				g.fillRect((i*length), (j*length), length, length);
 
 				g.setColor(CalculateSquareColor(board[i][j],i,j));
 
 				// Create smaller square of a different color inside the black square
-				g.fillRect(1 + (i*length), 1 + (j*length), squareLength-2, squareLength-2);
+				g.fillRect(1 + (i*length), 1 + (j*length), length-2, length-2);
 
 			}	
 		}
@@ -73,7 +54,6 @@ public class DrawGrid extends JPanel implements MouseListener
 
 	private void calculateSquareLength()
 	{
-
 		int temp = 0;
 
 		//Square length has to be dynamic so as to always choose smallest side
@@ -102,48 +82,39 @@ public class DrawGrid extends JPanel implements MouseListener
 
 	private Color CalculateSquareColor(Square square, int x, int y) 
 	{
-		Slug temp = square.getSlug();
-
 		if(showAllSquares)
 		{
 			//if slug but no hit
-			if(hits[x][y] == 0 && temp != null)
+			if(!square.isHit() && square.hasSlug())
 			{
 				return Color.black;
 			}
 			//If no slug
-			else if(temp == null)
+			else if(!square.isHit() && !square.hasSlug())
 			{
 				return Color.white;
 			}
 			
 		}
 
-		/*
-		System.out.println(showAllSquares);
-		System.out.println(hits[x][y]);
-		System.out.println(temp);
-		 */
 
 		//No slug and hit
-		if(hits[x][y]== 1 && temp == null)
+		if(board[x][y].isHit() && !board[x][y].hasSlug())
 		{
 			return Color.gray;
 		}
 
-		//slug and hit (hit = 2 is a confirmed hit)
-		if(hits[x][y]== 2) //|| (hits[x][y] == 1 && temp != null))
+		//slug and hit
+		if(board[x][y].isHit() && board[x][y].hasSlug())
 		{
-			//Not sure if second part of IF is required - if error when removed,
-			//hits is storing as 1 when there is a slug instead of 0
 			return Color.red;
 		}
 		//nothing done yet is white
-		else if(hits[x][y] == 0)
+		else if(!board[x][y].isHit())
 		{
 			return Color.white;
 		}
-		//Any other solutions are errors ex: having hits 1 and having a slug there
+		//Any other solutions are errors
 		else
 		{
 			System.out.println("Error in square color processing(1)");
@@ -176,11 +147,13 @@ public class DrawGrid extends JPanel implements MouseListener
 	public void mouseReleased(MouseEvent e) {}
 
 	private int getSquareLength() {
-		return squareLength;
+		return prop.getSquareLength();
 	}
 
 	private void setSquareLength(int squareLength) {
-		this.squareLength = squareLength;
+		System.out.println(squareLength);
+		prop.setSquareLength(squareLength);
+		
 	}
 
 }

@@ -11,15 +11,21 @@ public class Square extends JComponent
 	 * which need to be placed in a square like slug. 
 	 * This would be easy to implement here
 	 */
-	Slug slug;
+	boolean slug = false;
+	boolean hit = false;
 
-	
-	public Slug getSlug() {
+	public boolean hasSlug() {
 		return slug;
 	}
-
-	public void setSlug(Slug slug) {
+	public void setSlug(boolean slug) {
 		this.slug = slug;
 	}
+	public boolean isHit() {
+		return hit;
+	}
+	public void setHit(boolean hit) {
+		this.hit = hit;
+	}
+
 
 }

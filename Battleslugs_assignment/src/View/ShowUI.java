@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import Model.Player;
 
-public class ShowUI extends JFrame implements MouseListener
+public class ShowUI extends JFrame
 {
 
 	Player p1;
@@ -57,7 +57,7 @@ public class ShowUI extends JFrame implements MouseListener
 		}
 		
 		//Extra attention here
-		p_Board = new DrawGrid(temp.getBoard(), temp.getHits(),false);
+		p_Board = new DrawGrid(temp.getBoard(),false);
 		add(new StatsPanel(temp), "East");
 		
 		setLayout(new BorderLayout());
@@ -108,35 +108,5 @@ public class ShowUI extends JFrame implements MouseListener
 			result.add(new JPanel());
 		}
 		return result;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

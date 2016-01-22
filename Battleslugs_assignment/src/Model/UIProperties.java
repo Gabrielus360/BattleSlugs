@@ -9,8 +9,9 @@ public class UIProperties
 	Dimension screenSize;
 	int width;
 	int height;
+	int SquareLength;
 	
-	
+
 	public UIProperties() 
 	{
 		screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -30,5 +31,12 @@ public class UIProperties
 	public void setHeight(int height) {
 		this.height = height;
 	}
+	public int getSquareLength() {
+		return SquareLength;
+	}
+	public void setSquareLength(int squareLength) {
+		SquareLength = squareLength;
+	}
+	
 	
 }
