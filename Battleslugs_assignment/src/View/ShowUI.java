@@ -5,14 +5,11 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
+
 import Model.Player;
 
 public class ShowUI extends JFrame
@@ -58,6 +55,7 @@ public class ShowUI extends JFrame
 		
 		//Extra attention here
 		p_Board = new DrawGrid(temp.getBoard(),false);
+		
 		add(new StatsPanel(temp), "East");
 		
 		setLayout(new BorderLayout());

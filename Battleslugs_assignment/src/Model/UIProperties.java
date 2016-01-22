@@ -37,6 +37,4 @@ public class UIProperties
 	public void setSquareLength(int squareLength) {
 		SquareLength = squareLength;
 	}
-	
-	
 }

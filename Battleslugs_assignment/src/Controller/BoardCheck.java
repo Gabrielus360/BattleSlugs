@@ -2,16 +2,28 @@ package Controller;
 
 import Model.Square;
 
-public class BoardControl 
+public class BoardCheck 
 {
+	
 
 	/*
-	 * Used locations
-	 */
-
 	public boolean isEmpty(int x, int y,Square[][] board)
 	{
 		if(board[x][y].hasSlug())
+		{
+			return false;
+		}
+		return true;
+	}
+	*/
+	
+	/*
+	 * Passing square is more efficient on both sides, 
+	 * kept code just in case
+	 */
+	public boolean isEmpty(Square square)
+	{
+		if(square.hasSlug())
 		{
 			return false;
 		}

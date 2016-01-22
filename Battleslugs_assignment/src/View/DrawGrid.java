@@ -139,6 +139,8 @@ public class DrawGrid extends JPanel implements MouseListener
 
 		System.out.println(x);
 		System.out.println(y);
+		
+		
 	}
 
 	public void mouseEntered(MouseEvent e) {}
@@ -155,5 +157,4 @@ public class DrawGrid extends JPanel implements MouseListener
 		prop.setSquareLength(squareLength);
 		
 	}
-
 }

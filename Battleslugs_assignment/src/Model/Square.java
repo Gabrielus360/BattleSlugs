@@ -1,8 +1,6 @@
 package Model;
 
-import javax.swing.JComponent;
-
-public class Square extends JComponent
+public class Square
 {
 	/*
 	 * This allows me to easily add features to a particular square,
