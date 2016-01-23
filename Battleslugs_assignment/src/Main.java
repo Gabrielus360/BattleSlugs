@@ -1,3 +1,4 @@
+import Controller.CreateSlug;
 import Model.Player;
 import View.ShowUI;
 
@@ -10,6 +11,7 @@ public class Main
 		Player p2 = new Player();
 
 		ShowUI UI = new ShowUI(p1,p2); 
+		CreateSlug slug = new CreateSlug(p1.getBoard());
 	}
 
 }

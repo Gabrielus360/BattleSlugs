@@ -11,6 +11,15 @@ public class CreateSlug
 	public CreateSlug(Square[][] board)
 	{
 		this.board = board;
+		int[][] result = new int[5][5];
+		
+		
+		generateSlug(4, 4, result, 0);
+
+		for (int i = 0; i < result.length; i++) 
+		{
+			System.out.println("X: " + result[i][0]+" Y: "+result[i][1]);
+		}
 	}
 
 	/*
@@ -56,36 +65,54 @@ public class CreateSlug
 	{
 		boolean empty = false;
 		boolean valid = false;
+		boolean repeatedLocation = false;
+		boolean recurseAgain = freeIndex<result.length;
+		System.out.println(recurseAgain);
 		int[] temp = generateNewLocation(startingX, startingY);
 		int tempX = temp[0];
 		int tempY = temp[1];
-
-		empty = checkLocation.isEmpty(board[tempX][tempY]);
-		valid = checkLocation.isValid(tempX, tempY, board[0].length, board[1].length);
-
-		for (int i = 0; i < result[0].length; i++) 
+		
+		System.out.println("tempx: "+ tempX +" tempY "+tempY);
+		
+		valid = checkLocation.isValid(tempX, tempY, board[0].length-1, board[1].length-1);
+		
+		System.out.println(valid);
+		
+		if(valid && recurseAgain)
 		{
-			if(result[i][0] == tempX)
+			//need to check if there is a slug AFTER the check to see if location exists
+			empty = checkLocation.isEmpty(board[tempX][tempY]);
+			
+			for (int i = 0; i < result[0].length; i++) 
 			{
-				if(result[i][1] == tempY)
+				if(result[i][0] == tempX)
 				{
-					valid = false;
+					if(result[i][1] == tempY)
+					{
+						repeatedLocation = true;
+					}
 				}
 			}
+
+			if(valid && empty && !repeatedLocation)
+			{
+				//System.out.println(freeIndex);
+				result[freeIndex][0] = tempX;
+				result[freeIndex][1] = tempY;
+				freeIndex++;
+				generateSlug(tempX, tempY, result, freeIndex);
+			}
+			else if(repeatedLocation)
+			{
+				generateSlug(startingX, startingY, result, freeIndex);
+			}
 		}
-		
-		if(valid && empty)
+		//might be freeIndex<(result.length -1)
+		else if(recurseAgain)
 		{
-			result[freeIndex][0] = tempX;
-			result[freeIndex][1] = tempY;
-			freeIndex++;
+			generateSlug(startingX, startingY, result, freeIndex);
 		}
-		//might be freeIndex<result.length -1
-		if(freeIndex<result.length)
-		{
-		generateSlug(tempX, tempY, result, freeIndex);
-		}
-		
+
 		return result;
 	}
 }

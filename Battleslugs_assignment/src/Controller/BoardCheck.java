@@ -23,24 +23,23 @@ public class BoardCheck
 	 */
 	public boolean isEmpty(Square square)
 	{
+		boolean result = true;
 		if(square.hasSlug())
 		{
-			return false;
+			result = false;
 		}
-		return true;
+		
+		return result;
 	}
 
 	public boolean isValid(int x, int y,int xMax,int yMax)
 	{
-		boolean result = true;
+		boolean result = false;
 
-		if(x<xMax && x>yMax)
+		if(x>0 && x<xMax && y>0 && y<yMax)
 		{
-			result = false;
-		}
-		else if(y<0 && y>11)
-		{
-			result = false;
+			result = true;
+			//System.out.println("Entered here");
 		}
 		return result;
 	}
