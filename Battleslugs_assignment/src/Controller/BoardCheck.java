@@ -36,7 +36,7 @@ public class BoardCheck
 	{
 		boolean result = false;
 
-		if(x>0 && x<xMax && y>0 && y<yMax)
+		if(x>=0 && x<xMax && y>=0 && y<yMax)
 		{
 			result = true;
 			//System.out.println("Entered here");

@@ -14,7 +14,7 @@ public class CreateSlug
 		int[][] result = new int[5][5];
 		
 		
-		generateSlug(4, 4, result, 0);
+		generateSlug(6, 6, result, 0);
 
 		for (int i = 0; i < result.length; i++) 
 		{
@@ -61,6 +61,17 @@ public class CreateSlug
 		return new int[] {newx,newy};
 	}
 
+	/**
+	 * Uses recursion to create a valid slug. It makes sure the slug does 
+	 * not go off the grid but then some other code needs to handle changing 
+	 * color of the first square to red and verifying no other squares are on
+	 * the same location
+	 * @param startingX
+	 * @param startingY
+	 * @param result
+	 * @param freeIndex
+	 * @return
+	 */
 	public int[][] generateSlug(int startingX, int startingY, int[][] result, int freeIndex)
 	{
 		boolean empty = false;
