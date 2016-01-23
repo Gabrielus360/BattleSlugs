@@ -5,11 +5,14 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
+import Controller.GridController;
+import Model.GridListener;
 import Model.Player;
 
 public class ShowUI extends JFrame
@@ -34,7 +37,7 @@ public class ShowUI extends JFrame
 	public void userInterface()
 	{
 		//make sure correct values are stored in player, not the temp player!
-		DrawGrid p_Board;
+		//DrawGrid p_Board;
 		Player temp;
 		
 		if(showP1)
@@ -53,13 +56,13 @@ public class ShowUI extends JFrame
 			temp = p2;
 		}
 		
-		//Extra attention here
-		p_Board = new DrawGrid(temp.getBoard(),false);
-		
-		add(new StatsPanel(temp), "East");
+		//Extra attention here due to listener and visible all is true
+		GridController grid = new GridController(temp.getBoard(), true );
+		JPanel gridPanel = grid.getGrid();
+		//add(new StatsPanel(temp), "East");
 		
 		setLayout(new BorderLayout());
-		add(p_Board, "Center");
+		add(gridPanel, "Center");
 		
 
 		add(SwitchPlayerPanel(), "South");

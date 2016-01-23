@@ -1,17 +1,10 @@
-import Controller.CreateSlug;
-import Model.Player;
-import View.ShowUI;
+import Controller.Game;
 
 public class Main 
 {
 	public static void main(String[] args) 
 	{
-
-		Player p1 = new Player();
-		Player p2 = new Player();
-
-		ShowUI UI = new ShowUI(p1,p2); 
-		CreateSlug slug = new CreateSlug(p1.getBoard());
+		Game g = new Game();
 	}
 
 }

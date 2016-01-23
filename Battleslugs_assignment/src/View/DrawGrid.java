@@ -6,22 +6,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.*;
+
+import Controller.BoardCheck;
 import Model.*;
 
-public class DrawGrid extends JPanel implements MouseListener
+public class DrawGrid extends JPanel implements MouseListener, GridListener
 {
 	private UIProperties prop = new UIProperties();
 	private Square[][] board;
 	private boolean showAllSquares;
-	
+	private GridListener gListener;
 
 	/*
 	 * To be used when drawing main board
 	 */
-	public DrawGrid(Square[][] board, boolean showAllSquares)
+	public DrawGrid(Square[][] board, boolean showAllSquares, GridListener gListener)
 	{
 		this.board = board;
 		this.showAllSquares = showAllSquares;
+		this.gListener = gListener;
 		addMouseListener(this);
 	}
 
@@ -30,7 +33,7 @@ public class DrawGrid extends JPanel implements MouseListener
 	{
 		super.paint(g);
 		int length = 0;
-		
+
 		calculateSquareLength();
 		length = prop.getSquareLength();
 
@@ -94,7 +97,7 @@ public class DrawGrid extends JPanel implements MouseListener
 			{
 				return Color.white;
 			}
-			
+
 		}
 
 
@@ -124,23 +127,35 @@ public class DrawGrid extends JPanel implements MouseListener
 
 	}
 
+
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
-		//IMPORTANT: starts from 0 like arrays
-		System.out.println(e.getX());;
-		System.out.println(e.getY());;
-		int x = 0;
-		int y = 0;
-		
+		BoardCheck check = new BoardCheck();
 
-		x = e.getX()/getSquareLength();
-		y = e.getY()/getSquareLength();
+		int x = e.getX();
+		int y = e.getY();
 
-		System.out.println(x);
-		System.out.println(y);
-		
-		
+		int xSquareLocation = e.getX()/getSquareLength();
+		int ySquareLocation = e.getY()/getSquareLength();
+
+		//System.out.println("X: " + xSquareLocation + " Y: " + ySquareLocation);
+
+		boolean valid = check.isValid(xSquareLocation, ySquareLocation, board[0].length, board[1].length);
+
+		if (valid) 
+		{
+			System.out.println("Valid!");
+			clicked(board[xSquareLocation][ySquareLocation]);
+		}
+		else
+		{
+			System.out.println("Ignore!");
+		}
+
+
+
+
 	}
 
 	public void mouseEntered(MouseEvent e) {}
@@ -155,6 +170,14 @@ public class DrawGrid extends JPanel implements MouseListener
 	private void setSquareLength(int squareLength) {
 		System.out.println(squareLength);
 		prop.setSquareLength(squareLength);
-		
+
 	}
+
+	@Override
+	public void clicked(Square s) {
+		gListener.clicked(s);		
+	}
+
+
+
 }
