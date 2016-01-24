@@ -1,13 +1,10 @@
 package Controller;
 
-import java.awt.event.MouseEvent;
-
 import javax.swing.JPanel;
 
 import Model.GridListener;
 import Model.Square;
 import View.DrawGrid;
-import View.UIProperties;
 
 public class GridController implements GridListener
 {

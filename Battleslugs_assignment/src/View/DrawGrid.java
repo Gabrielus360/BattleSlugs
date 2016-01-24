@@ -18,7 +18,7 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 	private GridListener gListener;
 
 	/*
-	 * To be used when drawing main board
+	 * Draws the main board with a mouseListener which calls parent GridListener
 	 */
 	public DrawGrid(Square[][] board, boolean showAllSquares, GridListener gListener)
 	{
@@ -26,6 +26,15 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 		this.showAllSquares = showAllSquares;
 		this.gListener = gListener;
 		addMouseListener(this);
+	}
+	
+	/*
+	 *  Draws the main board without a mouseListener, thus it is only displayed
+	 */
+	public DrawGrid(Square[][] board, boolean showAllSquares)
+	{
+		this.board = board;
+		this.showAllSquares = showAllSquares;
 	}
 
 
@@ -152,10 +161,6 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 		{
 			System.out.println("Ignore!");
 		}
-
-
-
-
 	}
 
 	public void mouseEntered(MouseEvent e) {}
@@ -174,8 +179,9 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 	}
 
 	@Override
-	public void clicked(Square s) {
-		gListener.clicked(s);		
+	public void clicked(Square s) 
+	{
+		gListener.clicked(s);
 	}
 
 

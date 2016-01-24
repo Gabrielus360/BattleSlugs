@@ -13,6 +13,7 @@ public class StatsPanel extends JPanel
 {
 	public StatsPanel(Player p) 
 	{
+		//Calculations still required
 		JLabel hits = new JLabel("Total attempted hits: " + p.getAttempts() );
 		JLabel lives = new JLabel("Lives left: " + p.getLivesLeft());
 		JLabel enemyHits = new JLabel("Successful enemy hits: " + p.getSuccessfulHits());
@@ -25,6 +26,8 @@ public class StatsPanel extends JPanel
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		add(hits);
 		add(lives);
+		add(enemyHits);
+		add(enemyHitsLeft);
 	}
 	
 	/*

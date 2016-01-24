@@ -14,6 +14,10 @@ public class Game
 		Player p2 = new Player();
 
 		ShowUI UI = new ShowUI(p1,p2); 
-		CreateSlug slug = new CreateSlug(p1.getBoard());
+
+		//Created here for testing purposes
+		
+		//CreateSlug generateSlug = new CreateSlug();
+		//int[][] result = generateSlug.getSlugLocations();
 	}
 }
