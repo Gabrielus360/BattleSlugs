@@ -154,13 +154,13 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 
 		if (valid) 
 		{
-			System.out.println("Valid!");
+			//System.out.println("Valid!");
 			clicked(board[xSquareLocation][ySquareLocation]);
 			clicked(xSquareLocation,ySquareLocation);
 		}
 		else
 		{
-			System.out.println("Ignore!");
+			//System.out.println("Ignore!");
 		}
 	}
 
@@ -174,7 +174,7 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 	}
 
 	private void setSquareLength(int squareLength) {
-		System.out.println(squareLength);
+		//System.out.println(squareLength);
 		prop.setSquareLength(squareLength);
 
 	}

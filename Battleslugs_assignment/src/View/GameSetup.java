@@ -2,7 +2,10 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,7 +15,7 @@ import Model.GridListener;
 import Model.Player;
 import Model.Square;
 
-public class GamesSetup extends JFrame implements GridListener
+public class GameSetup extends JFrame implements GridListener
 {
 	Player[] playerArr;
 	int currPlayer = 0;
@@ -21,22 +24,15 @@ public class GamesSetup extends JFrame implements GridListener
 	int[][] generatedLocation;
 	DrawGrid playerBoard;
 
-
-	public GamesSetup(Player[] playerArr) 
+	public GameSetup(Player[] playerArr) 
 	{
 		this.playerArr = playerArr;
-	
+
 		setLayout(new BorderLayout());
 		setSize(800,600);
-		//for (int i = 0; i < playerArr.length; i++) 
-		//{
-			//for (int j = 0; j < playerArr[i].getTotalSlugs(); j++) 
-			//{
-				setup(playerArr[0]);
-				currPlayer = 0;
-			//}
-		//}
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		setup(playerArr[currPlayer]);
 		setVisible(true);
 
 	}
@@ -46,15 +42,55 @@ public class GamesSetup extends JFrame implements GridListener
 		generatedLocation = new int[5][2];
 		slugControl.generateSlug(6, 6, generatedLocation, 0);
 		JPanel slugPreviewPanel = new JPanel();
+		slugPreviewPanel.setLayout(new BorderLayout());
 		slugPreviewPanel= previewSlug(generatedLocation);
-		slugPreviewPanel.setVisible(true);
 
 		playerBoard = new DrawGrid(p.getBoard(), true, this);
 		setLayout(new GridLayout(1,2));
 		add(playerBoard);
 		add(slugPreviewPanel);
-
 	}
+	
+	public void calculateNextDraw()
+	{
+		System.out.println("CurrPlayer: " + currPlayer);
+		if(playerArr[currPlayer].getSlugsLeftToCreate() != 1)
+		{
+			playerArr[currPlayer].decrementSlugsLeftToCreate();
+		}
+		else if(currPlayer < playerArr.length-1)
+		{
+			System.out.println("Switch player contition satisfied");
+			System.out.println("Currplayer:" + currPlayer);
+			currPlayer++;
+			getContentPane().removeAll();
+			setup(playerArr[currPlayer]);
+			setVisible(true);
+			
+		}
+		else
+		{
+			System.out.println("Switch to game");
+			this.setVisible(false);
+			ShowUI UI = new ShowUI(playerArr[0],playerArr[1]);
+		}
+	}
+
+	public JButton createRegenerateBtn()
+	{
+		JButton btn = new JButton();
+		btn.addActionListener(new ActionListener() { 
+			  public void actionPerformed(ActionEvent e) 
+			  { 
+				  generatedLocation = new int[5][2];
+				slugControl.generateSlug(6, 6, generatedLocation, 0);
+			  } 
+			} );
+		
+		return btn;
+	}
+	
+	
 
 	public JPanel previewSlug(int[][] locations)
 	{
@@ -118,17 +154,19 @@ public class GamesSetup extends JFrame implements GridListener
 		int xDifference = x - generatedLocation[0][0];
 		int yDifference = y - generatedLocation[0][1];
 
-		System.out.println("xDiff: " + xDifference);
-		System.out.println("yDiff: " + yDifference);
+		//System.out.println("xDiff: " + xDifference);
+		//System.out.println("yDiff: " + yDifference);
 		for (int i = 0; i < generatedLocation.length; i++) 
 		{
 			int newX = generatedLocation[i][0] + xDifference;
 			int newY = generatedLocation[i][1] + yDifference;
-			
+
 			Square temp = p.getBoard()[newX][newY];
 			temp.setSlug(true);
 		}
-		
+
+		//After each SUCCESSFUL click, determine if the next user needs to click now
+		calculateNextDraw();
 		playerBoard.repaint();
 	}
 
@@ -143,8 +181,6 @@ public class GamesSetup extends JFrame implements GridListener
 	@Override
 	public void clicked(int xSquare, int ySquare) 
 	{
-	
-		
 		if(checkValid(xSquare, ySquare,playerArr[currPlayer]))
 		{
 			placeSlugs(xSquare, ySquare, playerArr[currPlayer]);

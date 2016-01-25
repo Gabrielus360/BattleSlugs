@@ -73,6 +73,12 @@ public class Player
 	{
 		this.slugsLeftToCreate = slugsLeftToCreate;
 	}
+	
+	public void decrementSlugsLeftToCreate() 
+	{
+		this.slugsLeftToCreate--;
+	}
+	
 	public int getLivesLeft() {
 		return livesLeft;
 	}

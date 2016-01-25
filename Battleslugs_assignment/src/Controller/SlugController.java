@@ -69,7 +69,6 @@ public class SlugController
 	public int[][] generateSlug(int startingX, int startingY, int[][] result, int freeIndex)
 	{
 		boolean recurseAgain = freeIndex<result.length;
-		System.out.println(result.length);
 		if(recurseAgain)
 		{
 			boolean empty = false;
