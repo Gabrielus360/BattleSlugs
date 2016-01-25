@@ -17,12 +17,14 @@ import Model.Square;
 
 public class GameSetup extends JFrame implements GridListener
 {
-	Player[] playerArr;
-	int currPlayer = 0;
+	
 	SlugController slugControl = new SlugController();
 	BoardCheck check = new BoardCheck();
+	Player[] playerArr;
+	int currPlayer = 0;
 	int[][] generatedLocation;
 	DrawGrid playerBoard;
+	
 
 	public GameSetup(Player[] playerArr) 
 	{
@@ -31,7 +33,7 @@ public class GameSetup extends JFrame implements GridListener
 		setLayout(new BorderLayout());
 		setSize(800,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		setup(playerArr[currPlayer]);
 		setVisible(true);
 
@@ -40,17 +42,25 @@ public class GameSetup extends JFrame implements GridListener
 	private void setup(Player p)
 	{
 		generatedLocation = new int[5][2];
+		playerBoard = new DrawGrid(p.getBoard(), true, this);
+		setLayout(new GridLayout(1,2));
+		
+		add(playerBoard);
+		add(createSlugPreviewPanel());
+		setVisible(true);
+	}
+	
+	public JPanel createSlugPreviewPanel()
+	{
 		slugControl.generateSlug(6, 6, generatedLocation, 0);
 		JPanel slugPreviewPanel = new JPanel();
 		slugPreviewPanel.setLayout(new BorderLayout());
-		slugPreviewPanel= previewSlug(generatedLocation);
-
-		playerBoard = new DrawGrid(p.getBoard(), true, this);
-		setLayout(new GridLayout(1,2));
-		add(playerBoard);
-		add(slugPreviewPanel);
+		slugPreviewPanel.add(previewSlug(generatedLocation), "Center");
+		slugPreviewPanel.add(createRegenerateBtn(slugPreviewPanel), "South");
+		
+		return slugPreviewPanel;
 	}
-	
+
 	public void calculateNextDraw()
 	{
 		System.out.println("CurrPlayer: " + currPlayer);
@@ -66,7 +76,7 @@ public class GameSetup extends JFrame implements GridListener
 			getContentPane().removeAll();
 			setup(playerArr[currPlayer]);
 			setVisible(true);
-			
+
 		}
 		else
 		{
@@ -76,21 +86,26 @@ public class GameSetup extends JFrame implements GridListener
 		}
 	}
 
-	public JButton createRegenerateBtn()
+	public JButton createRegenerateBtn(JPanel slugPanel)
 	{
-		JButton btn = new JButton();
+		JButton btn = new JButton("Regenerate Slug");
 		btn.addActionListener(new ActionListener() { 
-			  public void actionPerformed(ActionEvent e) 
-			  { 
-				  generatedLocation = new int[5][2];
+			public void actionPerformed(ActionEvent e) 
+			{ 
 				slugControl.generateSlug(6, 6, generatedLocation, 0);
-			  } 
-			} );
-		
+				JPanel slug = previewSlug(generatedLocation);
+				
+				getContentPane().removeAll();
+				setup(playerArr[currPlayer]);
+				
+				slugPanel.add(slug,"Center");
+			} 
+		} );
+
 		return btn;
 	}
-	
-	
+
+
 
 	public JPanel previewSlug(int[][] locations)
 	{
