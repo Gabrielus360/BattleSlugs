@@ -156,6 +156,7 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 		{
 			System.out.println("Valid!");
 			clicked(board[xSquareLocation][ySquareLocation]);
+			clicked(xSquareLocation,ySquareLocation);
 		}
 		else
 		{
@@ -182,6 +183,12 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 	public void clicked(Square s) 
 	{
 		gListener.clicked(s);
+	}
+
+	@Override
+	public void clicked(int xSquare, int ySquare) {
+		gListener.clicked(xSquare, ySquare);
+		
 	}
 
 

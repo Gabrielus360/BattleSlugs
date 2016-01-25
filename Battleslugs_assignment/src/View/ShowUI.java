@@ -38,7 +38,7 @@ public class ShowUI extends JFrame
 	{
 		//make sure correct values are stored in player, not the temp player!
 		//DrawGrid p_Board;
-		JPanel eastPane = new JPanel();
+		
 		
 
 
@@ -50,14 +50,17 @@ public class ShowUI extends JFrame
 		setLayout(new BorderLayout());
 		add(centerGridPanel, "Center");
 		
-		eastPane.setLayout(new GridLayout(2,1));
+		
 		
 		int[][] slugCoordinates = new int[5][2];
 		slugControl.generateSlug(6, 6, slugCoordinates, 0);
-		
-		eastPane.add(previewSlug(slugCoordinates));
+		JPanel eastPane = new JPanel();
+		eastPane.setLayout(new GridLayout(2,1));
+
 		eastPane.add(new StatsPanel(getCurrentPlayer()));
 		eastPane.setVisible(true);
+		
+		
 
 		add(SwitchPlayerPanel(), "South");
 		add(eastPane, "East");
@@ -79,6 +82,8 @@ public class ShowUI extends JFrame
 	 * result[index][0] = XLOCATION
 	 * result[index][1] = YLOCATION
 	 */
+	
+	
 	public Player getCurrentPlayer()
 	{
 		if(showP1)
@@ -98,35 +103,7 @@ public class ShowUI extends JFrame
 	}
 	
 	
-	public JPanel previewSlug(int[][] locations)
-	{
-		
-		int xlocation = 0;
-		int yLocation = 0;
-		Square[][] board;
-		board = new Square[12][12];
-		
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board[1].length; j++) 
-			{
-				board[i][j] = new Square();
-			}
-		}
-		
-		for (int i = 0; i < locations.length; i++) 
-		{
-			xlocation = locations[i][0];
-			yLocation = locations[i][1];
-			board[xlocation][yLocation].setSlug(true);
-		}
-		//So that original square is indicated by a red color 
-		board[locations[0][0]][locations[0][1]].setHit(true);
-
-		DrawGrid grid = new DrawGrid(board,true);
-		grid.setVisible(true);
-		return grid;
-	}
-
+	
 	public JPanel SwitchPlayerPanel() 
 	{
 		JToggleButton btn = new JToggleButton("Switch player");

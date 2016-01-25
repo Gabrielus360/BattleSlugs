@@ -7,4 +7,5 @@ package Model;
 public interface GridListener 
 {
 	void clicked(Square s);
+	void clicked(int xSquare,int ySquare);
 }

@@ -54,4 +54,10 @@ public class GridController implements GridListener
 		this.grid = grid;
 	}
 
+	@Override
+	public void clicked(int xSquare, int ySquare) {
+		//forced to implement due to lack of delegates in java.
+		//Only needed in the beginning of game when slugs need to be placed		
+	}
+
 }
