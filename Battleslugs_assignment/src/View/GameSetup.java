@@ -35,6 +35,7 @@ public class GameSetup extends JFrame implements GridListener
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setup(playerArr[currPlayer]);
+		ShowUI ui = new ShowUI(playerArr[0],playerArr[1]);
 		setVisible(true);
 
 	}

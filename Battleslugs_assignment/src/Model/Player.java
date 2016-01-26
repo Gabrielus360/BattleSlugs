@@ -53,6 +53,11 @@ public class Player
 	{
 		this.attempts = attempts;
 	}
+	
+	public void incrementAttempts() 
+	{
+		this.attempts++;
+	}
 
 	public int getSuccessfulHits() 
 	{
@@ -62,6 +67,11 @@ public class Player
 	public void setSuccessfulHits(int successfulHits) 
 	{
 		this.successfulHits = successfulHits;
+	}
+	
+	public void incrementSuccessfulHits() 
+	{
+		this.successfulHits++;
 	}
 
 	public int getSlugsLeftToCreate() 
@@ -86,6 +96,11 @@ public class Player
 	public void setLivesLeft(int livesLeft) {
 		this.livesLeft = livesLeft;
 	}
+	
+	public void incrementLivesLeft() {
+		this.livesLeft++;
+	}
+	
 	public int getTotalSlugs() {
 		return totalSlugs;
 	}

@@ -57,7 +57,7 @@ public class ShowUI extends JFrame
 		JPanel eastPane = new JPanel();
 		eastPane.setLayout(new GridLayout(2,1));
 
-		eastPane.add(new StatsPanel(getCurrentPlayer()));
+		eastPane.add(new StatsPanel(p1,p2,showP1));
 		eastPane.setVisible(true);
 		
 		

@@ -1,11 +1,7 @@
 package Controller;
 
-import javax.swing.JFrame;
-
 import Model.Player;
-import View.DrawGrid;
 import View.GameSetup;
-import View.ShowUI;
 
 public class Game 
 {
