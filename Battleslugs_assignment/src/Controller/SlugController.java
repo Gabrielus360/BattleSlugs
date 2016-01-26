@@ -1,12 +1,15 @@
 package Controller;
 
+import java.util.Random;
+
 import Model.*;
 
 public class SlugController 
 {
 	BoardCheck checkLocation = new BoardCheck();
-	//int[][] slugLocations = new int[5][5];
 	Square[][] board=new Square[16][16];
+	static Random r = new Random();
+	int rand = 0;
 
 
 	public SlugController()
@@ -19,62 +22,56 @@ public class SlugController
 	}
 
 	/*
-	 * 8		1		2
-	 * 7	[original]	3
-	 * 6		5		4
+	 * 6		3		0
+	 * 5	[original]	2
+	 * 4		7		1
 	 */
-
 	public int[] generateNewLocation(int x, int y)
 	{
 		int newx = x;
 		int newy = y;
-		int rand = 0;
-
+		
+		
+		
 		//Min + (int)(Math.random() * ((Max - Min) + 1))
-		rand = 1 + (int)(Math.random() * ((8 - 1) + 1));
+		rand = (int)(r.nextInt(8));
 
-		switch (rand) 
+		if (rand < 3) //0,1,2
 		{
-		case 1:
-			newy++;
-			break;
-
-		case 2:
-			newy++;
-			newx++;
-			break;
-
-		case 3:
-			newx++;
-			break;
-
-		case 4:
-			newx++;
-			newy--;
-			break;
-
-		case 5:
-			newy--;
-			break;
-
-		case 6:
-			newx--;
-			newy--;
-			break;
-
-		case 7:
-			newx--;
-			break;
-
-		case 8:
-			newx--;
-			newy++;
-			break;
-
+		    newx++;
+		}
+		else if (rand < 6) //3,4,5
+		{
+		    newx--;
 		}
 
+		//change y according to number
+		if(rand % 3 == 0) //0,3,6
+		{
+		    newy++;
+		}
+		else if(rand % 3 == 1) //1,4,7
+		{
+		    newy--;
+		}
+		
 		/*
-		//Shorter, not recommended by teacher (personally prefer)
+		switch (rand){
+    	case 1:         newy++; break;
+    	case 2: newx++; newy++; break;
+    	case 3: newx++;         break;
+    	case 4: newx++; newy--; break;
+    	case 5:         newy--; break;
+    	case 6: newx--; newy--; break;
+    	case 7: newx--;         break;
+    	case 8: newx--; newy++; break;
+		}
+
+		
+		*/
+
+		/*
+		//Shorter, not recommended by teacher
 		//change x according to number
 		if(rand >= 2 && rand<= 4)
 		{
@@ -167,13 +164,4 @@ public class SlugController
 
 		return result;
 	}
-	/*
-	public int[][] getSlugLocations() {
-		return slugLocations;
-	}
-
-	public void setSlugLocations(int[][] slugLocations) {
-		this.slugLocations = slugLocations;
-	}
-	*/
 }

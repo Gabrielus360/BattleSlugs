@@ -16,6 +16,9 @@ public class GridController implements GridListener
 	int ySquareLocation;
 	BoardCheck check =new BoardCheck();
 	
+	/*
+	 * Creates board with listener. The listener then processes 
+	 */
 	public GridController(Square[][] board, boolean showAll) 
 	{
 		this.board = board;

@@ -7,19 +7,7 @@ public class BoardCheck
 	
 
 	/*
-	public boolean isEmpty(int x, int y,Square[][] board)
-	{
-		if(board[x][y].hasSlug())
-		{
-			return false;
-		}
-		return true;
-	}
-	*/
-	
-	/*
-	 * Passing square is more efficient on both sides, 
-	 * kept code just in case
+	 * Checks if a square currently has a slug, returns true and false accordingly
 	 */
 	public boolean isEmpty(Square square)
 	{
@@ -32,6 +20,10 @@ public class BoardCheck
 		return result;
 	}
 
+	/*
+	 * Checks if location given goes out of the board
+	 * @return boolean - when true, location is inside board, when invalid returns false
+	 */
 	public boolean isValid(int x, int y,int xMax,int yMax)
 	{
 		boolean result = false;
