@@ -5,7 +5,7 @@ import Model.*;
 public class SlugController 
 {
 	BoardCheck checkLocation = new BoardCheck();
-	int[][] slugLocations = new int[5][5];
+	//int[][] slugLocations = new int[5][5];
 	Square[][] board=new Square[16][16];
 
 
@@ -32,7 +32,49 @@ public class SlugController
 
 		//Min + (int)(Math.random() * ((Max - Min) + 1))
 		rand = 1 + (int)(Math.random() * ((8 - 1) + 1));
-		
+
+		switch (rand) 
+		{
+		case 1:
+			newy++;
+			break;
+
+		case 2:
+			newy++;
+			newx++;
+			break;
+
+		case 3:
+			newx++;
+			break;
+
+		case 4:
+			newx++;
+			newy--;
+			break;
+
+		case 5:
+			newy--;
+			break;
+
+		case 6:
+			newx--;
+			newy--;
+			break;
+
+		case 7:
+			newx--;
+			break;
+
+		case 8:
+			newx--;
+			newy++;
+			break;
+
+		}
+
+		/*
+		//Shorter, not recommended by teacher (personally prefer)
 		//change x according to number
 		if(rand >= 2 && rand<= 4)
 		{
@@ -52,6 +94,8 @@ public class SlugController
 		{
 			newy--;
 		}
+
+		 */
 
 		//Gives back new (suggested and unverified location)
 		return new int[] {newx,newy};
@@ -123,7 +167,7 @@ public class SlugController
 
 		return result;
 	}
-
+	/*
 	public int[][] getSlugLocations() {
 		return slugLocations;
 	}
@@ -131,4 +175,5 @@ public class SlugController
 	public void setSlugLocations(int[][] slugLocations) {
 		this.slugLocations = slugLocations;
 	}
+	*/
 }
