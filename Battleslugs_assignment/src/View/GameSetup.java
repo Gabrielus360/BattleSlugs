@@ -26,6 +26,9 @@ public class GameSetup extends JFrame implements GridListener
 	DrawGrid playerBoard;
 	
 
+	/*
+	 * Shows first UI to add slugs to JPanel
+	 */
 	public GameSetup(Player[] playerArr) 
 	{
 		this.playerArr = playerArr;
@@ -35,11 +38,13 @@ public class GameSetup extends JFrame implements GridListener
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		setup(playerArr[currPlayer]);
-		ShowUI ui = new ShowUI(playerArr[0],playerArr[1]);
 		setVisible(true);
 
 	}
 
+	/*
+	 * Draws random generation to board
+	 */
 	private void setup(Player p)
 	{
 		generatedLocation = new int[5][2];
@@ -51,6 +56,10 @@ public class GameSetup extends JFrame implements GridListener
 		setVisible(true);
 	}
 	
+	/*
+	 * Adds slug preview and regenerate to a single panel
+	 */
+	
 	public JPanel createSlugPreviewPanel()
 	{
 		slugControl.generateSlug(6, 6, generatedLocation, 0);
@@ -61,7 +70,10 @@ public class GameSetup extends JFrame implements GridListener
 		
 		return slugPreviewPanel;
 	}
-
+	
+	/*
+	 * Check which player needs to place slugs and if both are ready, starts the game
+	 */
 	public void calculateNextDraw()
 	{
 		System.out.println("CurrPlayer: " + currPlayer);
@@ -87,6 +99,9 @@ public class GameSetup extends JFrame implements GridListener
 		}
 	}
 
+	/*
+	 * Creates regenerate button which allows the user to regerate a slug
+	 */
 	public JButton createRegenerateBtn(JPanel slugPanel)
 	{
 		JButton btn = new JButton("Regenerate Slug");
@@ -106,8 +121,9 @@ public class GameSetup extends JFrame implements GridListener
 		return btn;
 	}
 
-
-
+	/*
+	 * Gives back a JPanel with slugs at the given location
+	 */
 	public JPanel previewSlug(int[][] locations)
 	{
 		int xlocation = 0;
@@ -136,6 +152,9 @@ public class GameSetup extends JFrame implements GridListener
 		return grid;
 	}
 
+	/*
+	 * Checks location exists and is not already taken up by another slug
+	 */
 	private boolean checkValid(int x, int y, Player p)
 	{
 		boolean success = true;
@@ -165,6 +184,9 @@ public class GameSetup extends JFrame implements GridListener
 		return true;
 	}
 
+	/*
+	 * Places slug in player's square[][] board
+	 */
 	void placeSlugs(int x, int y, Player p)
 	{
 		int xDifference = x - generatedLocation[0][0];
@@ -193,7 +215,9 @@ public class GameSetup extends JFrame implements GridListener
 	//extra since multiple squares need to be changed and not just one
 	public void clicked(Square s) {}
 
-
+	/*
+	 * Called when user clicks a field
+	 */
 	@Override
 	public void clicked(int xSquare, int ySquare) 
 	{

@@ -10,18 +10,6 @@ public class Player
 	Square[][] board = new Square[12][12]; 
 	
 	/*
-	 *hits store the hits the other player/s has made on this player
-	 *First two variables are coordinates
-	 *Result in those coordinates represent the following:
-	 * 0 = no hit = white
-	 * 1 = hit , no slug = grey
-	 * 2 = hit and slug  = red
-	 */
-	int[][] hits = new int[12][12];
-
-
-
-	/*
 	 * Initializing board
 	 */
 	public Player() 
@@ -108,12 +96,4 @@ public class Player
 	public void setTotalSlugs(int totalSlugs) {
 		this.totalSlugs = totalSlugs;
 	}
-	public int[][] getHits() {
-		return hits;
-	}
-
-	public void setHits(int[][] hits) {
-		this.hits = hits;
-	}
-
 }

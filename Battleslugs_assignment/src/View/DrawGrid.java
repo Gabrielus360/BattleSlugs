@@ -37,7 +37,10 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 		this.showAllSquares = showAllSquares;
 	}
 
-
+	/*
+	 * This JPanel object has a paint class which is called every time a variable changes. This was overridden so as to paint a grid of squares
+	 * This now draws a black square at the bottom and paints a square on the top with white, red, or grey accordingly
+	 */
 	public void paint(Graphics g)
 	{
 		super.paint(g);
@@ -63,6 +66,11 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 			}	
 		}
 	}
+	
+	/*
+	 * Makes sure the grid is always a square, so it gets the smallest side and sets that as a square length. 
+	 * This needs to be used by paint() to paint a square of the correct length independant of the window width 
+	 */
 
 	private void calculateSquareLength()
 	{
@@ -136,7 +144,9 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 
 	}
 
-
+/*
+ * When mouse is clicked, the x and y coordinates are mapped to square and are handed back to the parent which called it
+ */
 	@Override
 	public void mouseClicked(MouseEvent e) 
 	{
@@ -190,7 +200,4 @@ public class DrawGrid extends JPanel implements MouseListener, GridListener
 		gListener.clicked(xSquare, ySquare);
 		
 	}
-
-
-
 }

@@ -23,6 +23,9 @@ public class ShowUI extends JFrame
 	boolean showP1 = true;
 	SlugController slugControl = new SlugController();
 
+	/*
+	 * Shows game UI
+	 */
 	public ShowUI(Player p1, Player p2) 
 	{
 		this.p1 = p1;
@@ -38,9 +41,6 @@ public class ShowUI extends JFrame
 	{
 		//make sure correct values are stored in player, not the temp player!
 		//DrawGrid p_Board;
-		
-		
-
 
 		//Extra attention here due to listener and visible all is true
 		GridController grid = new GridController(getCurrentPlayer().getBoard(), true);
@@ -83,7 +83,9 @@ public class ShowUI extends JFrame
 	 * result[index][1] = YLOCATION
 	 */
 	
-	
+	/*
+	 * Calculates which turn it is and returns the player directly
+	 */
 	public Player getCurrentPlayer()
 	{
 		if(showP1)
@@ -103,7 +105,9 @@ public class ShowUI extends JFrame
 	}
 	
 	
-	
+	/*
+	 * Has panel with a switch player button
+	 */
 	public JPanel SwitchPlayerPanel() 
 	{
 		JToggleButton btn = new JToggleButton("Switch player");
@@ -117,6 +121,9 @@ public class ShowUI extends JFrame
 		return addAtCenter(btn);
 	}
 
+	/*
+	 * Switches player back and forth when clicked
+	 */
 	private void switchPlayer()
 	{
 		showP1 = !showP1;
@@ -124,6 +131,9 @@ public class ShowUI extends JFrame
 		userInterface();
 	}
 
+	/*
+	 * Adds element given to a center of a JPanel so as to not take all the space (makes it neater)
+	 */
 	private JPanel addAtCenter(Component c)
 	{
 

@@ -24,6 +24,4 @@ public class Square
 	public void setHit(boolean hit) {
 		this.hit = hit;
 	}
-
-
 }

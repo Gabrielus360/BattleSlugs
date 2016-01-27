@@ -14,6 +14,9 @@ public class StatsPanel extends JPanel
 	Player enemyPlayer;
 	boolean showP1Stats;
 
+	/*
+	 * Requires stats of enemy and own players and for which player
+	 */
 	StatsPanel(Player player, Player player2,boolean showP1Stats)
 	{
 		this.playerToDisplay  = player;
@@ -26,6 +29,9 @@ public class StatsPanel extends JPanel
 		//this.setText(createLabelText());
 	}
 
+	/*
+	 * Changes variables to represent which player's stats are currently being displayed
+	 */
 	public void useCorrectPlayer()
 	{
 		if(!showP1Stats)
@@ -36,6 +42,9 @@ public class StatsPanel extends JPanel
 		}
 	}
 
+	/*
+	 * Calculates actual turns left and other factors
+	 */
 	public void calculateLabelContents()
 	{
 		playerToDisplay.setAttempts(0);
@@ -68,6 +77,10 @@ public class StatsPanel extends JPanel
 			}
 		}
 	}
+	
+	/*
+	 * Adds labels to this (which extends JPanel)
+	 */
 
 	public void addLabels()
 	{
